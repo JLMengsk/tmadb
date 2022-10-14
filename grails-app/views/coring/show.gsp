@@ -1,0 +1,99 @@
+
+<%@ page import="ca.ubc.gpec.tmadb.Coring" %>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="layout" content="main" />
+        <g:set var="entityName" value="${message(code: 'coring.label', default: 'Coring')}" />
+        <title><g:message code="default.show.label" args="[entityName]" /></title>
+    </head>
+    <body>
+        <div class="nav">
+            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
+            <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
+            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+        </div>
+        <div class="body">
+            <h1><g:message code="default.show.label" args="[entityName]" /></h1>
+            <g:if test="${flash.message}">
+            <div class="message">${flash.message}</div>
+            </g:if>
+            <div class="dialog">
+                <table>
+                    <tbody>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="coring.id.label" default="Id" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: coringInstance, field: "id")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="coring.checked_date.label" default="Checkeddate" /></td>
+                            
+                            <td valign="top" class="value"><g:formatDate date="${coringInstance?.checked_date}" /></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="coring.comment.label" default="Comment" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: coringInstance, field: "comment")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="coring.cored_date.label" default="Coreddate" /></td>
+                            
+                            <td valign="top" class="value"><g:formatDate date="${coringInstance?.cored_date}" /></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="coring.coring_project.label" default="Coringproject" /></td>
+                            
+                            <td valign="top" class="value"><g:link controller="coring_projects" action="show" id="${coringInstance?.coring_project?.id}">${coringInstance?.coring_project?.encodeAsHTML()}</g:link></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="coring.coring_type.label" default="Coringtype" /></td>
+                            
+                            <td valign="top" class="value"><g:link controller="coring_types" action="show" id="${coringInstance?.coring_type?.id}">${coringInstance?.coring_type?.encodeAsHTML()}</g:link></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="coring.rna_extractions.label" default="Rnaextractions" /></td>
+                            
+                            <td valign="top" style="text-align: left;" class="value">
+                                <ul>
+                                <g:each in="${coringInstance.rna_extractions}" var="r">
+                                    <li><g:link controller="rna_extractions" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
+                                </g:each>
+                                </ul>
+                            </td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="coring.surgical_block.label" default="Surgicalblock" /></td>
+                            
+                            <td valign="top" class="value"><g:link controller="surgical_blocks" action="show" id="${coringInstance?.surgical_block?.id}">${coringInstance?.surgical_block?.encodeAsHTML()}</g:link></td>
+                            
+                        </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+            <div class="buttons">
+                <g:form>
+                    <g:hiddenField name="id" value="${coringInstance?.id}" />
+                    <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
+                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+                </g:form>
+            </div>
+        </div>
+    </body>
+</html>
