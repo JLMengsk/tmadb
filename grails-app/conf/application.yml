@@ -108,6 +108,7 @@ hibernate:
         queries: false
         use_second_level_cache: false
         use_query_cache: false
+    allow_update_outside_transaction: true
 dataSource:
     pooled: true
     jmxExport: true
@@ -119,24 +120,24 @@ dataSource:
 environments:
     development:
         dataSource:
-            dbCreate: create-drop
+            dbCreate: update
             url: "jdbc:mysql://192.168.119.137:3306/tmadb"
         grails:
             logging:
                 jul:
                     usebridge: true
-            serverURL: "http://ubuntu-server:8080/${appName}-0.1"
+            serverURL: "http://ubuntu-server:8080"
             serverURL_noAppName : "http://ubuntu-server:8080/"
-            serverSecureURL : "https://ubuntu-server:8181/${appName}-0.1"
-            serverSecureURL_noAppName : "https://ubuntu-server:8181/"
+            serverSecureURL : "https://ubuntu-server:8443" 
+            serverSecureURL_noAppName : "https://ubuntu-server:8443"
 
     test:
         dataSource:
             dbCreate: update
             url: "jdbc:mysql://192.168.119.137:3306/tmadb"
         grails:
-            serverURL: "http://ubuntu-server:8080/${appName}-0.1"
-            serverSecureURL: "https://ubuntu-server:8181/${appName}-0.1" 
+            serverURL: "http://ubuntu-server:8080/tmadb"
+            serverSecureURL: "https://ubuntu-server:8181/tmadb" 
 
     production:
         dataSource:
@@ -161,7 +162,7 @@ environments:
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
         grails:
-            serverURL: "http://www.gpec.ubc.ca:8080/${appName}-0.1"
+            serverURL: "http://www.gpec.ubc.ca:8080/tmadb"
             serverURL_noAppName: "http://www.gpec.ubc.ca:8080/"
-            serverSecureURL: "https://www.gpec.ubc.ca/${appName}-0.1"
+            serverSecureURL: "https://www.gpec.ubc.ca/tmadb"
             serverSecureURL_noAppName: "https://www.gpec.ubc.ca/"

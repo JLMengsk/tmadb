@@ -1,0 +1,6 @@
+#Fri, 14 Oct 2022 02:07:50 -0700
+
+info.app.version=0.1
+info.app.name=tmadb
+grails.env=development
+info.app.grailsVersion=5.2.2
