@@ -19,8 +19,9 @@
         ... loading ... please wait
       </div>   
     </div>
-  <r:require module="scoreTma"/>
-  <r:script>
+  <asset:stylesheet src="application.css"/>
+  <asset:javascript src="application.js"/>
+  <asset:script type="text/javascript" disposition="head">
     dojo.ready(function() {
     showWaitDialog(1);
     new Ajax.Request('${createLink(controller:"scoreTma", action:"ajax_get_submitted_scoring_sessions_for_score_audit")}',{
@@ -44,6 +45,6 @@
     resizeDojoDataGrid_table('submitted_scoring_sessionsGrid'); // set window resize event handler
     }
     });
-  </r:script>
+  </asset:script>
 </body>
 </html>

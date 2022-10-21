@@ -62,7 +62,7 @@ class Biomarkers implements SecuredMethods, Comparable<Biomarkers> {
         def results1 = Staining_details.findAllByBiomarker(this)
         if (results1.size() == 0) {return false} // no need to test further
 
-        def results2 = Tma_slices.findAllByStaining_detailInList(results1)
+        def results2 = Tma_slices.findAllByStaining_detail(results1)
         if (results2.size() == 0) {return false} // no need to test further
 
         def results = User_permits.withCriteria {

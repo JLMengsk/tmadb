@@ -114,9 +114,9 @@ class Tma_projectsController {
         def tma_projects = Tma_projects.list(params, user)
         int unique_id=0; // unique id for dojo table
         render(contentType: "text/json") {
-            identifier = "id"
-            numRows = tma_projects.size()
-            items = array{
+            identifier: "id"
+            numRows: tma_projects.size()
+            items: array{
                 tma_projects.each { w -> 
                     // NOTE: items in array canNOT be null
                     item(

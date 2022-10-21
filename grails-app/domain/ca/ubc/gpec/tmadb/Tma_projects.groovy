@@ -41,10 +41,10 @@ class Tma_projects implements SecuredMethods {
         // admin can access everything
         if (user.login.equals(Users.ADMINISTRATOR_LOGIN)) {return true}
 		
-        def results1 = Tma_blocks.findAllByTma_arrayInList(this.tma_arrays)
+        def results1 = Tma_blocks.findAllByTma_array(this.tma_arrays)
         if (results1.size() == 0) {return false} // no need to test further
 		
-        def results2 = Tma_slices.findAllByTma_blockInList(results1)
+        def results2 = Tma_slices.findAllByTma_block(results1)
         if (results2.size() == 0) {return false} // no need to test further
 		
         def results3 = User_permits.withCriteria {

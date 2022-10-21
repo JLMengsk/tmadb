@@ -143,3 +143,4 @@ assets {
     minifyCss = true
     //includes = ['/grails-app/assets/javascripts']
 }
+   

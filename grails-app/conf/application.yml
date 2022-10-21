@@ -46,6 +46,16 @@ environments:
 
 ---
 grails:
+    resources:
+        mappers:
+            hashandcache:
+                excludes: ['**/dojo/**']
+        adhoc:
+            excludes: ['**/dojo/**']
+            patterns: ['/images/*', '/css/*', '/js/*']
+
+
+
     project:
         groupId: appName
     scaffolding:
@@ -85,7 +95,7 @@ grails:
               - application/xml
     urlmapping:
         cache:
-            maxsize: 1000
+            maxsize: 5000
     controllers:
         defaultScope: singleton
     converters:
@@ -101,6 +111,22 @@ grails:
                 scriptlet: html
                 taglib: none
                 staticparts: none
+        javascript:
+            library: dojo
+    json:
+        legacy:
+            builder: false
+    enable:
+        native2ascii: true
+    spring:
+        bean:
+            packages: []
+    web:
+        disable:
+            multipart: false
+    exceptionresolver:
+        params:
+            exclude: 'password'
 
 ---
 hibernate:
@@ -109,6 +135,11 @@ hibernate:
         use_second_level_cache: false
         use_query_cache: false
     allow_update_outside_transaction: true
+    pass:
+        readonly: false
+    osiv:
+        readonly: false
+
 dataSource:
     pooled: true
     jmxExport: true
@@ -128,8 +159,15 @@ environments:
                     usebridge: true
             serverURL: "http://ubuntu-server:8080"
             serverURL_noAppName : "http://ubuntu-server:8080/"
-            serverSecureURL : "https://ubuntu-server:8443" 
-            serverSecureURL_noAppName : "https://ubuntu-server:8443"
+            serverSecureURL : "http://ubuntu-server:8080" 
+            serverSecureURL_noAppName : "https://ubuntu-server:8080"
+        dojo:
+            optimize:
+                during:
+                    build: false
+            use:
+                customBuild:
+                    js: false
 
     test:
         dataSource:
@@ -138,6 +176,13 @@ environments:
         grails:
             serverURL: "http://ubuntu-server:8080/tmadb"
             serverSecureURL: "https://ubuntu-server:8181/tmadb" 
+        dojo:
+            optimize:
+                during:
+                    build: false
+            use:
+                customBuild:
+                    js: false
 
     production:
         dataSource:
@@ -161,6 +206,13 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+        dojo:
+            optimize:
+                during:
+                    build: true
+            use:
+                customBuild:
+                    js: true
         grails:
             serverURL: "http://www.gpec.ubc.ca:8080/tmadb"
             serverURL_noAppName: "http://www.gpec.ubc.ca:8080/"

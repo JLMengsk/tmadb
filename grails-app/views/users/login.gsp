@@ -8,13 +8,11 @@
   <body>
     <div class="body">
       <g:if test="${session.user==null}">
-        <!-- [<g:link url="${grailsApplication.config.grails.serverURL}">back</g:link>] -->
-        [<g:link url="${grails.serverURL}">back</g:link>]
+        [<g:link url="${grailsApplication.config.grails.serverURL}">back</g:link>]
       </g:if>
       <g:else>
-        <!-- [<g:link url="${grailsApplication.config.grails.serverSecureURL}">back</g:link>] -->
-        [<g:link url="${grails.serverSecureURL}">back</g:link>]
-      </g:else>s
+        [<g:link url="${grailsApplication.config.grails.serverSecureURL}">back</g:link>]
+      </g:else>
       <h1>Sign in</h1>
       <div class="dialog" style="width: 300px">
         <g:showFlashMessage />

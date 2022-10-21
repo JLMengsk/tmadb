@@ -8,6 +8,8 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'tma_projects.label', default: 'TMA project')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
+        <asset:stylesheet src="application.css"/>
+        <asset:javascript src="application.js"/>
     </head>
     <body>
         <div class="body">
@@ -27,8 +29,9 @@
 
         </div>
     </div>
-<r:require module="tma_slices"/>
-<r:script>
+
+
+<asset:script type="text/javascript" disposition="head">
     require(["dojo/_base/xhr"], function (xhr) {
 
     var waitDialogObj = getWaitDialog();
@@ -58,6 +61,6 @@
     }
 
     }); // function (xhr)
-</r:script>
+</asset:script>
 </body>
 </html>

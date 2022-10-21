@@ -6,6 +6,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
         <title>TMA slices available to ${user.getName()}</title>
+        <asset:stylesheet src="application.css"/>
+        <asset:javascript src="application.js"/>
     </head>
     <body>
         <div class="body">
@@ -21,9 +23,11 @@
 
     </div>
 </div>
-<r:require module="tma_slices"/>
-<r:script>
-    require(["dojo/_base/xhr"], function (xhr) {
+
+<asset:script type="text/javascript">
+    // require(["dojo/_base/xhr"], 
+    
+    function (xhr) {
 
     var waitDialogObj = getWaitDialog();
 
@@ -53,6 +57,8 @@
 
     }); // function (xhr)
 
-</r:script>
+</asset:script>
+
+<asset:deferredScripts/>
 </body>
 </html>

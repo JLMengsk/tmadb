@@ -60,6 +60,15 @@ class ScoreTmaController {
         render(view: "auditScores", model: [user: user])
     }
 	
+
+
+
+
+
+
+
+
+
     /**
      * return a list of available scoring session
      * - assume user is logged in!!!
@@ -71,9 +80,9 @@ class ScoreTmaController {
         int unique_id=0; // unique id for dojo table
                 
         render(contentType: "text/json") {
-            identifier = "id"
-            numRows = scoring_sessions.size()
-            items = array{
+            identifier: "id"
+            numRows: scoring_sessions.size()
+            items: array{
                 scoring_sessions.each { scoring_session -> 
                     // NOTE: items in array canNOT be null
                     item(
@@ -86,7 +95,11 @@ class ScoreTmaController {
             }
         }
     }
-    
+
+
+
+
+
     /**
      * return a list of submitted scoring sessions for score audit
      */
@@ -99,9 +112,9 @@ class ScoreTmaController {
         }
         int unique_id=0; // unique id for dojo table
         render(contentType: "text/json") {
-            identifier = "id"
-            numRows = submitted_scoring_sessions.size()
-            items = array{    
+            identifier: "id"
+            numRows: submitted_scoring_sessions.size()
+            items: array{    
                 submitted_scoring_sessions.each {scoring_session -> 
                     // NOTE: items in array canNOT be null
                     item(

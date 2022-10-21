@@ -33,9 +33,11 @@
       </div>
 
     </div>
-  <r:require module="scoreTma"/>
-  <r:script>
-    require(["dojo/_base/xhr"], function (xhr) {
+  <asset:stylesheet src="application.css"/>
+  <asset:javascript src="application.js"/>
+  <asset:script type="text/javascript">
+    // require(["dojo/_base/xhr"], 
+    function (xhr) {
     
     showWaitDialog(1);
     
@@ -53,7 +55,7 @@
     closeWaitDialog();
     },
     onError:function(e){alert("${ViewConstants.UNKNOWN_SERVER_ERROR_MESSAGE }");}
-    });	// xhr.get	
+    }); // xhr.get  
 
     window.onresize=function(){
     setInitialPageBodyHeight();
@@ -61,6 +63,6 @@
     resizeDojoDataGrid_table('scoring_sessionsGrid'); // set window resize event handler
     }
     }); // function (xhr)
-  </r:script>
+  </asset:script>
 </body>
 </html>
