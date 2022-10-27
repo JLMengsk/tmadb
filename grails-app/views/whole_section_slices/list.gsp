@@ -25,11 +25,10 @@
     </div>
 
 <asset:script type="text/javascript" disposition="head">    
-  //require(["dojo/_base/xhr"], 
-    
-    function (xhr) {
 
-    var waitDialogObj = getWaitDialog();
+    require(["dojo/_base/xhr"], function (xhr) {
+
+    //var waitDialogObj = getWaitDialog();
 
     // get some data, convert to JSON
     xhr.get({
@@ -41,7 +40,8 @@
     "whole_section_slicesGrid",
     "slide_count");
     resizeDojoDataGrid_table('whole_section_slicesGrid');
-    waitDialogObj.destroy();
+    //waitDialogObj.destroy();
+    closeWaitDialog();
     },onError:function(e){alert("${ViewConstants.UNKNOWN_SERVER_ERROR_MESSAGE }");}
     }); // xhr.get
 

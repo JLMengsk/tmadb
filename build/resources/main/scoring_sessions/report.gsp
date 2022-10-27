@@ -6,6 +6,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="layout" content="main" />
     <title>Scoring session report: ${scoring_sessionsInstance.getName()}</title>
+    <asset:stylesheet src="application.css"/>
+    <asset:javascript src="application.js"/>
   </head>
   <body>
     <div class="body">
@@ -73,8 +75,8 @@
       </div>
 
     </div>
-  <r:require module="scoring_sessions"/>
-  <r:script>
+
+  <asset:script type="text/javascript">
     require(["dojo/_base/xhr"], function (xhr) {
 
     showWaitDialog(1);
@@ -98,6 +100,6 @@
     resizeDojoDataGrid_table('scoring_sessionReportGrid'); // set window resize event handler
     }
     }); // function (xhr)
-  </r:script>
+  </asset:script>
 </body>
 </html>

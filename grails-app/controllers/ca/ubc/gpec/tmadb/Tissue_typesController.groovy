@@ -106,9 +106,9 @@ class Tissue_typesController {
         def tissue_types = Tissue_types.list();
         int unique_id=0; // unique id for dojo table
         render(contentType: "text/json") {
-            identifier = "id"
-            numRows = tissue_types.size()
-            items = array{
+            identifier: "id"
+            numRows: tissue_types.size()
+            items: array{
                 tissue_types.each { y -> 
                     // NOTE: items in array canNOT be null
                     item(

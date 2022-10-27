@@ -12,7 +12,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="layout" content="main" />
     <title>Scoring session: ${scoring_sessionInstance.getName()}</title>
-  <r:require modules="image_helpers, ki67_qc_phase3"/>
+    <asset:stylesheet src="application.css"/>
+    <asset:javascript src="application.js"/>
 </head>
 <body>
   <div class="body">
@@ -21,7 +22,7 @@
       <g:showFlashMessage />
       <p><g:display_scoring_session_progress id="${scoring_sessionInstance.getId()}"/></p>
       <!-- show timer if user has not submitted the results yet ...-->
-      <g:if test="${whole_section_scoring?.showIsAllowedToUpdateScore()}"><r:script>timeMsg();</r:script></g:if>
+      <g:if test="${whole_section_scoring?.showIsAllowedToUpdateScore()}"><asset:script>timeMsg();</asset:script></g:if>
     </g:if>
     <g:display_scoring_image_option scoring="${scoring}"  showReference="${showReference}"  showPageBodyOnly="${showPageBodyOnly}" showHE="${showHE}" showMM="${showMM}" />
     <br>
@@ -82,7 +83,7 @@
       </div> <!-- <div class="dialog"> -->
     </div> <!-- <div dojoType='dijit.form.Form'> -->
   </div>
-<r:script>  
+<asset:script> 
   <g:display_whole_section_scoring_he_mm_javascripts id="${whole_section_scoring?.getId()}"/>
 
   // function to go back to previous step i.e. count hotspot
@@ -114,7 +115,7 @@
   );
   }
 
-</r:script>
+</asset:script>
 
 </body>
 </html>

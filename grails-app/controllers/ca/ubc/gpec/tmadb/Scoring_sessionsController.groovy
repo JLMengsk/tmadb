@@ -747,11 +747,11 @@ class Scoring_sessionsController {
             if (scoring_sessionsInstance.showContainsOnlyTma_scorings()) {
                 boolean showReference = scoring_sessionsInstance.showSubmitted() && scoring_sessionsInstance.getTma_scorings().first()?.showTma_scoring_referencesAvailable() && (!scoring_sessionsInstance.showIsKi67QcCalibratorTest()) // DO NOT show reference if ki67 calibrator test
                 render(contentType: "text/json") {
-                    scoring_session_scoring_type = ViewConstants.SCORING_SESSION_SCORING_TYPE_TMA_SCORING
-                    references_available = showReference
-                    identifier = "id"
-                    numRows = scoring_sessionsInstance.getTma_scorings().size()
-                    items = array{
+                    scoring_session_scoring_type: ViewConstants.SCORING_SESSION_SCORING_TYPE_TMA_SCORING
+                    references_available: showReference
+                    identifier: "id"
+                    numRows: scoring_sessionsInstance.getTma_scorings().size()
+                    items:array{
                         scoring_sessionsInstance.getTma_scorings().each { s ->
                             // NOTE: items in array canNOT be null 
                             String title = "Click me to show TMA core; you "+(scoring_sessionsInstance.showSubmitted()==true ? 'cannot' : 'can')+" update score";
@@ -770,10 +770,10 @@ class Scoring_sessionsController {
                 }
             } else if (scoring_sessionsInstance.showContainsOnlyWhole_section_scorings()) {                
                 render(contentType: "text/json") {
-                    scoring_session_scoring_type = ViewConstants.SCORING_SESSION_SCORING_TYPE_WHOLE_SECTION_SCORING;
-                    identifier = "id"
-                    numRows = scoring_sessionsInstance.getWhole_section_scorings().size()
-                    items = array{
+                    scoring_session_scoring_type: ViewConstants.SCORING_SESSION_SCORING_TYPE_WHOLE_SECTION_SCORING;
+                    identifier: "id"
+                    numRows: scoring_sessionsInstance.getWhole_section_scorings().size()
+                    items:array{
                         scoring_sessionsInstance.getWhole_section_scorings().each { s ->
                             // NOTE: items in array canNOT be null 
                             String title = "Click me to show whole section; you "+(scoring_sessionsInstance.showSubmitted()==true ? 'cannot' : 'can')+" update score";

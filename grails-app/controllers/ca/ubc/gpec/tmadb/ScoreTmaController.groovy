@@ -3,6 +3,9 @@ package ca.ubc.gpec.tmadb
 import ca.ubc.gpec.tmadb.util.MiscUtil;
 import ca.ubc.gpec.tmadb.util.ViewConstants;
 
+import java.util.ArrayList;
+
+
 class ScoreTmaController {
 
     def index = { 
@@ -61,14 +64,6 @@ class ScoreTmaController {
     }
 	
 
-
-
-
-
-
-
-
-
     /**
      * return a list of available scoring session
      * - assume user is logged in!!!
@@ -76,28 +71,26 @@ class ScoreTmaController {
     def ajax_get_available_scoring_session = {
         Users user = Users.findByLogin(session.user.login);
         SortedSet<Scoring_sessions> scoring_sessions = user.showAvailableScoringSessions();
-        
+        int id = 0;
         int unique_id=0; // unique id for dojo table
-                
+        String start_date;
+        String name;
+        String status;
+        ArrayList array = new ArrayList(scoring_sessions.size());
+        for (scoring_session in scoring_sessions) {
+            id = unique_id;
+            start_date = MiscUtil.formatDate(scoring_session.getStart_date());
+            name = scoring_session.getName()+ViewConstants.AJAX_RESPONSE_DELIMITER_2+scoring_session.getDescription()+ViewConstants.AJAX_RESPONSE_DELIMITER+scoring_session.getId();
+            status = scoring_session.showStatusNotice();
+            array.add("id":id, "start_date":start_date,"name":name,"status":status);
+            unique_id++;
+        }
         render(contentType: "text/json") {
-            identifier: "id"
-            numRows: scoring_sessions.size()
-            items: array{
-                scoring_sessions.each { scoring_session -> 
-                    // NOTE: items in array canNOT be null
-                    item(
-                        "id":unique_id++,
-                        "start_date":MiscUtil.formatDate(scoring_session.getStart_date()),
-                        "name":scoring_session.getName()+ViewConstants.AJAX_RESPONSE_DELIMITER_2+scoring_session.getDescription()+ViewConstants.AJAX_RESPONSE_DELIMITER+scoring_session.getId(),
-                        "status":scoring_session.showStatusNotice()
-                    )         
-                }
-            }
+            identifier("id") 
+            numRows(scoring_sessions.size())
+            items(array)
         }
     }
-
-
-
 
 
     /**
@@ -110,21 +103,24 @@ class ScoreTmaController {
                 submitted_scoring_sessions.add(it);   
             }
         }
+        int id = 0;
         int unique_id=0; // unique id for dojo table
+        String scorer;
+        String scoring_date;
+        String name;
+        ArrayList array = new ArrayList(scoring_sessions.size());
+        for (scoring_session in scoring_sessions) {
+            id = unique_id;
+            scorer = scoring_session.getTma_scorer().getName();
+            scoring_date = MiscUtil.formatDate(scoring_session.getSubmitted_date()); // assume submitted date must NOT BE NULL if submitted!!!
+            name = scoring_session.getName()+ViewConstants.AJAX_RESPONSE_DELIMITER_2+scoring_session.getDescription()+ViewConstants.AJAX_RESPONSE_DELIMITER+scoring_session.getId();
+            array.add("id":id, "scorer":scorer,"scoring_date":scoring_date,"name":name);
+            unique_id++;
+        }
         render(contentType: "text/json") {
-            identifier: "id"
-            numRows: submitted_scoring_sessions.size()
-            items: array{    
-                submitted_scoring_sessions.each {scoring_session -> 
-                    // NOTE: items in array canNOT be null
-                    item(
-                        "id":unique_id++,
-                        "scorer":scoring_session.getTma_scorer().getName(),
-                        "scoring_date":MiscUtil.formatDate(scoring_session.getSubmitted_date()), // assume submitted date must NOT BE NULL if submitted!!!
-                        "name":scoring_session.getName()+ViewConstants.AJAX_RESPONSE_DELIMITER_2+scoring_session.getDescription()+ViewConstants.AJAX_RESPONSE_DELIMITER+scoring_session.getId()
-                    )         
-                }
-            }
+            identifier("id") 
+            numRows(submitted_scoring_sessions.size())
+            items(array)
         }
     }
 }

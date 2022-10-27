@@ -46,9 +46,9 @@ class Whole_section_scoringsController {
                 }
             }
             render(contentType: "text/json") {
-                identifier = "id"
-                numRows = result.size()
-                items = array{
+                identifier: "id"
+                numRows: result.size()
+                items: array{
                     result.each {
                         // NOTE: items in array canNOT be null
                         wsrs -> item(

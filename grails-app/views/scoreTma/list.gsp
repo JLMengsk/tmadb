@@ -7,6 +7,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="layout" content="main" />
     <title>Score TMA</title>
+    <asset:stylesheet src="application.css"/>
+    <asset:javascript src="application.js"/>
+    <style type="text/css">
+        @import "https://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojox/grid/resources/claroGrid.css";
+        /*Grid needs an explicit height by default*/
+        #scoring_sessionsGrid {
+            height: 10em;
+            width: 40em;
+        }
+    </style>
   </head>
   <body>
     <div class="body">
@@ -26,20 +36,17 @@
       </g:if>
       <g:else>
         <p><img src="${resource(dir:'images/skin',file:'check.png')}"/> All scoring sessions completed and results submitted.  Thank you for your participation.</p>
-      </g:else>      
-      <div id="scoring_sessionsGrid" 
-           style="width: ${ViewConstants.SCORING_SESSIONS_GRID_WIDTH}px; height: ${ViewConstants.SCORING_SESSIONS_GRID_HEIGHT}px;">
+      </g:else>   
+
+      <div id="scoring_sessionsGrid">
         ... loading ... please wait
       </div>
 
     </div>
-  <asset:stylesheet src="application.css"/>
-  <asset:javascript src="application.js"/>
   <asset:script type="text/javascript">
-    // require(["dojo/_base/xhr"], 
-    function (xhr) {
+    require(["dojo/_base/xhr"], function (xhr) {
     
-    showWaitDialog(1);
+    //showWaitDialog(1);
     
     xhr.get({
         url: '${createLink(controller:"scoreTma", action:"ajax_get_available_scoring_session")}'+"?dummy="+(new Date()).getTime(), // dummy param added to prevent IE from caching the ajax response
@@ -52,7 +59,7 @@
     setInitialPageBodyHeight();
     setInitialFooterPosition();
     resizeDojoDataGrid_table('scoring_sessionsGrid');
-    closeWaitDialog();
+    //closeWaitDialog();
     },
     onError:function(e){alert("${ViewConstants.UNKNOWN_SERVER_ERROR_MESSAGE }");}
     }); // xhr.get  

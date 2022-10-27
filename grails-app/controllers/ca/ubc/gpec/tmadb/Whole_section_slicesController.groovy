@@ -60,9 +60,9 @@ class Whole_section_slicesController {
         }
         
         render(contentType: "text/json") {
-            identifier = "id"
-            numRows = whole_section_slices.size()
-            items = array{
+            identifier: "id"
+            numRows: whole_section_slices.size()
+            items: array{
                 whole_section_slices.each { w -> 
                     Biomarkers biomarker = w.getStaining_detail().getBiomarker();
                     String block_string = "";

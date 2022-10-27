@@ -23,7 +23,7 @@
   <asset:javascript src="application.js"/>
   <asset:script type="text/javascript" disposition="head">
     dojo.ready(function() {
-    showWaitDialog(1);
+    //showWaitDialog(1);
     new Ajax.Request('${createLink(controller:"scoreTma", action:"ajax_get_submitted_scoring_sessions_for_score_audit")}',{
     asynchronous:true,
     evalScripts:true,
@@ -36,7 +36,7 @@
     setInitialPageBodyHeight();
     setInitialFooterPosition();
     resizeDojoDataGrid_table('submitted_scoring_sessionsGrid');
-    closeWaitDialog();
+    //closeWaitDialog();
     },onError:function(e){alert("${ViewConstants.UNKNOWN_SERVER_ERROR_MESSAGE }");}});		
 
     window.onresize=function(){

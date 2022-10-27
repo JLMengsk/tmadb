@@ -25,11 +25,11 @@
 </div>
 
 <asset:script type="text/javascript">
-    // require(["dojo/_base/xhr"], 
+    require(["dojo/_base/xhr"], 
     
     function (xhr) {
 
-    var waitDialogObj = getWaitDialog();
+    // var waitDialogObj = getWaitDialog();
 
     // get some data, convert to JSON
     xhr.get({
@@ -45,7 +45,7 @@
     e,
     "tma_slicesGrid","slide_count");
     resizeDojoDataGrid_table('tma_slicesGrid');
-    waitDialogObj.destroy();
+    // waitDialogObj.destroy();
     },onError:function(e){alert("${ViewConstants.UNKNOWN_SERVER_ERROR_MESSAGE }");}
     }); // xhr.get
 

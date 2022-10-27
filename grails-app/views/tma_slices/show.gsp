@@ -9,6 +9,8 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'tma_slices.label', default: 'Tma slice')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
+        <asset:stylesheet src="application.css"/>
+        <asset:javascript src="application.js"/>
     </head>
     <body>
         <div class="body">
@@ -75,21 +77,21 @@
             </div>
         </div>
 
-    <r:require module="tma_slices"/>
-    <r:script>
+
+<asset:script type="text/javascript">
        require(["dojo/_base/xhr"], function (xhr) {
             
-        var waitDialogObj = getWaitDialog();
+        // var waitDialogObj = getWaitDialog();
         
         xhr.get({
             url:'${createLink(controller:"tma_slices", action:"ajaxGetAvailableScorers", id:tma_slicesInstance?.id)}',
             handleAs: "json",
             load: function(e){
                 updateTmaScorersInfos(e,'${tma_result==null?"":tma_result.getTma_result_name().getId()}','tma_result_names_id', '${createLink(controller:"tma_slices", action:"show", id:tma_slicesInstance?.id)}');
-                waitDialogObj.destroy();
+        //        waitDialogObj.destroy();
         }}); // xhr.get
     
         }); // function(xhr)
-    </r:script>
+    </asset:script>
 </body>
 </html>

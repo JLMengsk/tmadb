@@ -10,9 +10,9 @@
     <!-- need mymain.css since Grails will rewrite its own main.css -->
     <link rel="stylesheet" href="${resource(dir:'css',file:'mymain.css')}" type="text/css"/>
     <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dijit/themes/claro/claro.css">
     <script>dojoConfig = {parseOnLoad: true}</script>
-    <script src="https://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
     <script>
   dojo.require("dijit.Menu");
   dojo.require("dijit.MenuItem");
@@ -22,6 +22,8 @@
   dojo.require("dojo/dom");
   dojo.require("dojo/_base/fx");
   dojo.require("dojo/_base/xhr");
+  dojo.require("dojo/_base/lang");
+  dojo.require("dojo/data/ItemFileWriteStore");
   dojo.require("dojo/query!css2");
   dojo.require("dijit.Dialog");
   dojo.require("dijit.form.Button");

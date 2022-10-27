@@ -124,8 +124,8 @@ class BiomarkersController {
     def ajax_get_biomarker_by_name = {
         def existingBiomarkers = Biomarkers.findAllByName(params.get(ViewConstants.HTML_PARAM_NAME_EDIT_BIOMARKER_INPUT_NAME))
         render(contentType: "text/json") {
-            numRows = existingBiomarkers.size()
-            items = array{
+            numRows:existingBiomarkers.size()
+            items: array{
                 existingBiomarkers.each {
                     w -> item(
                         "name":w.name,

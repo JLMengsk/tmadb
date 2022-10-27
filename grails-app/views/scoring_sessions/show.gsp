@@ -12,7 +12,8 @@
         <g:set var="entityName"
         value="${message(code: 'scoring_sessions.label', default: 'Scoring_sessions')}" />
         <title>Scoring session: ${fieldValue(bean: scoring_sessionInstance, field: "name")}</title>
-    <r:require modules="image_helpers, scoring_sessions"/>
+        <asset:stylesheet src="application.css"/>
+        <asset:javascript src="application.js"/>
 </head>
 <body>
     <div class="body">
@@ -129,7 +130,7 @@
 
     </div>
 
-<r:script>
+<asset:script>
     <g:if test="${!showHE && !showMM}">
         var _tempFirstTimeLoading = true;
         var _tempResetInProgress = false;
@@ -181,7 +182,7 @@
 
             function openHeWindow() {heWindowHandle=window.open("<g:display_tma_scoring_he_link id="${tma_scoringInstance?.getId()}"/>","${DisplayConstant.H_AND_E_WINDOW}",JAVASCRIPT_OPEN_POPUP_WINDOW_SPECS);}
         </g:if>
-</r:script>
+</asset:script>
 
 </body>
 </html>

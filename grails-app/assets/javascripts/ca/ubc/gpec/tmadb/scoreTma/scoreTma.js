@@ -33,14 +33,15 @@ function buildAvailableScoring_sessionsBrowserTable(
         dataStore = new dojo.data.ItemFileReadStore({data: scoring_sessions});
         // default ... not doing anything special
         grid = new dojox.grid.DataGrid({
-            store: dataStore,
             structure: [
                 {name: "Assigned date", field: "start_date", width: "150px"},
                 {name: "Name", field: "name", width: "550px", formatter: format_name},
                 {name: "Status", field: "status", width: "100px"}
             ],
+            store: dataStore,
             autoWidth: true,
             loadingMessage: "... loading ... please wait"
+
         }, htmlTagName);
     }
     grid.startup();
@@ -74,9 +75,9 @@ function buildSubmittedScoring_sessionsBrowserTable(
     // The response comes back as a bunch-o-JSON
     var scoring_sessions;
     if (ajaxResponse == null) {
-        scoring_sessions = eval("([])")	// evaluate JSON
+        scoring_sessions = eval("([])") // evaluate JSON
     } else {
-        scoring_sessions = eval("(" + ajaxResponse.responseText + ")")	// evaluate JSON
+        scoring_sessions = eval("(" + ajaxResponse.responseText + ")")  // evaluate JSON
     }
     // width of table: 620 with right margin of 10px
     if (scoring_sessions) {

@@ -9,7 +9,7 @@
     </head>
     <body>
         <div class="body">
-            <h1>TMA projects available to ${user.getName()} (<div id="project_count" style='display: inline'></div>)</h1>
+            <h1 id="greeting">TMA projects available to ${user.getName()} (<div id="project_count" style='display: inline'></div>)</h1>
             <g:showFlashMessage />
             <div class="dialog">
                 <p>${user.getDescription()}</p>
@@ -19,15 +19,39 @@
                 ... loading ... please wait</div>
         </div>
     </div>
-    <asset:stylesheet src="application.css"/>
-    <asset:javascript src="application.js"/>
 
 
-<asset:script type="text/javascript">
+<script>
+  // Instead of using data-dojo-config, we're creating a dojoConfig
+  // object *before* we load dojo.js; they're functionally identical,
+  // it's just easier to read this approach with a larger configuration.
+  var dojoConfig = {
+    async: true,
+    // This code registers the correct location of the "demo"
+    // package so we can load Dojo from the CDN whilst still
+    // being able to load local modules
+    packages: [{
+      name: "demo",
+      location: location.pathname.replace(/\/[^/]*$/, '') + '/demo'
+    }]
+  };
+</script>
+<!-- load Dojo -->
+<script src="//ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js"></script>
 
-require(["dojo/_base/xhr"], function(xhr) {
 
-    showWaitDialog(1);
+<asset:stylesheet src="application.css"/>
+<asset:javascript src="application.js"/>
+
+
+
+
+<asset:script type="text/javascript" disposition="head">    
+    require([
+        'dojo/_base/xhr'
+    ], function (xhr) {
+
+    // showWaitDialog(1);
 
     xhr.get({
     url: '${createLink(controller:"tma_projects", action:"ajaxGetTma_projects")}',
@@ -43,7 +67,7 @@ require(["dojo/_base/xhr"], function(xhr) {
     closeWaitDialog();
     },
     onError:function(e){alert("${ViewConstants.UNKNOWN_SERVER_ERROR_MESSAGE }");}
-    }); // xhr.get  
+    });	// xhr.get	
 
     window.onresize=function(){
     setInitialPageBodyHeight();
