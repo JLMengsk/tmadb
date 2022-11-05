@@ -98,8 +98,8 @@ class Scoring_sessionsController {
         UploadCoreImagesForScoring uc = new UploadCoreImagesForScoring(log)
         bindData(uc, params)
         log.info("upload core images for scoring started: tma_project_id="+uc.getTma_project_id()+
-				"; biomarker_id="+uc.getBiomarker_id()+
-				"; scoring_session_id="+uc.getScoring_session_id()
+                "; biomarker_id="+uc.getBiomarker_id()+
+                "; scoring_session_id="+uc.getScoring_session_id()
         )
         try {
             uc.parseFile("\\t")
@@ -177,6 +177,9 @@ class Scoring_sessionsController {
      */
     def score = {
         Scoring_sessions scoring_sessionInstance = Scoring_sessions.get(params.id)
+
+        // render scoring_sessionInstance.status;
+
         if (!scoring_sessionInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'scoring_sessions.label', default: 'Scoring_sessions'), params.id])}"
             redirect(url: MiscUtil.showUserPreferredHomeUrl(session.user, grailsApplication.config.grails.serverSecureURL.toString()));
@@ -193,8 +196,54 @@ class Scoring_sessionsController {
         } else {
             // cannot figure out scoring type by param name ... need to check scoring_sessionInstance
             GenericScorings genericScoring = scoring_sessionInstance.showUnscoredScoring(); // showUnscoredScoring updates scoring_session status!!! therefore need to run this BEFORE e.g. scoring_sessionInstance.showCompleted();
+            
+            //Something wrong when changing status from 0 to 1
+
+            // render scoring_sessionInstance.status;
+            int num = scoring_sessionInstance.status;
+            // render num;
+            // scoring_sessionInstance.status = Integer.parseInt(params.id)%100;
+            scoring_sessionInstance.status = 2
+            // render scoring_sessionInstance.status;
+            scoring_sessionInstance.status = num;
+            // render scoring_sessionInstance.status;
+            scoring_sessionInstance.save(flush:true);
+
+
+
             if (!genericScoring) {
                 genericScoring = scoring_sessionInstance.showMaxVisitOrderScoring();
+
+
+                //Something wrong when changing status from 1 to 2
+                // render "completed"
+                if(scoring_sessionInstance.status != 3) {
+                    scoring_sessionInstance.status = 1;
+                    int completedNum = 2;
+                    scoring_sessionInstance.status = completedNum;
+                    scoring_sessionInstance.save(flush:true);
+                }
+                else if(scoring_sessionInstance.status == 3) {
+                    scoring_sessionInstance.status = 3;
+                    scoring_sessionInstance.save(flush:true);
+                }
+
+                // render scoring_sessionInstance.status;
+
+                // scoring_sessionInstance.status = 1;
+                // render scoring_sessionInstance.status;
+
+                // int completedMidNum = 2;
+                // render completedMidNums
+
+                // scoring_sessionInstance.status = completedMidNum;
+                // render scoring_sessionInstance.status;
+
+                // scoring_sessionInstance.save(flush:true);
+
+                // int completedNum = 2;
+                // scoring_sessionInstance.status = completedNum;
+                // scoring_sessionInstance.save(flush:true);
             }
             if (genericScoring instanceof Tma_scorings) {
                 tma_scoring = (Tma_scorings)genericScoring;
@@ -209,6 +258,7 @@ class Scoring_sessionsController {
         // some variables indicating the scoring session status
         boolean sessionCompleted = scoring_sessionInstance.showCompleted();
         boolean sessionSubmitted = scoring_sessionInstance.showSubmitted();
+
 
         if ((sessionCompleted || sessionSubmitted) && (!params.containsKey(ViewConstants.HTML_PARAM_NAME_SCORING_SESSION_TMA_SCORING_ID)) && (!params.containsKey(ViewConstants.HTML_PARAM_NAME_SCORING_SESSION_WHOLE_SECTION_SCORING_ID))) {
             // if scoring session is completed or submitted, redirect to report
@@ -229,7 +279,7 @@ class Scoring_sessionsController {
             flash.message = scoring_sessionInstance.name+" ... scoring completed!  Please review and submit scores.";
         }
                         
-	// put xxx_scoring_id in params to keep track
+    // put xxx_scoring_id in params to keep track
         if (tma_scoring != null) {
             params.put(ViewConstants.HTML_PARAM_NAME_SCORING_SESSION_TMA_SCORING_ID, tma_scoring.id);
         } else if (whole_section_scoring != null) {
@@ -745,49 +795,73 @@ class Scoring_sessionsController {
             // data formatter ... display purposes
             DateFormat df = new SimpleDateFormat(ViewConstants.DATE_FORMAT_LONG);
             if (scoring_sessionsInstance.showContainsOnlyTma_scorings()) {
+
+                List array = new ArrayList(scoring_sessionsInstance.getTma_scorings().size());
+                int id = 0;
+                String core_id;
+                String description;
+                String type;
+                String score;
+                String reference_score;
+                String scoring_date;
+                ArrayList ssInstances = scoring_sessionsInstance.getTma_scorings();
+
                 boolean showReference = scoring_sessionsInstance.showSubmitted() && scoring_sessionsInstance.getTma_scorings().first()?.showTma_scoring_referencesAvailable() && (!scoring_sessionsInstance.showIsKi67QcCalibratorTest()) // DO NOT show reference if ki67 calibrator test
-                render(contentType: "text/json") {
-                    scoring_session_scoring_type: ViewConstants.SCORING_SESSION_SCORING_TYPE_TMA_SCORING
-                    references_available: showReference
-                    identifier: "id"
-                    numRows: scoring_sessionsInstance.getTma_scorings().size()
-                    items:array{
-                        scoring_sessionsInstance.getTma_scorings().each { s ->
-                            // NOTE: items in array canNOT be null 
-                            String title = "Click me to show TMA core; you "+(scoring_sessionsInstance.showSubmitted()==true ? 'cannot' : 'can')+" update score";
-                            String url = createLink(controller:"scoring_sessions", action:"score", params:[id:scoring_sessionsInstance.getId(), tma_scoring_id:s.getId()]);
-                            item(
-                            "id":unique_id++,
-                            "core_id":s.getTma_core_image().getTma_core().getCore_id(),
-                            "description":s.showScoringDescription()+ViewConstants.AJAX_RESPONSE_DELIMITER+url+ViewConstants.AJAX_RESPONSE_DELIMITER+title,
-                            "type":s.showScoreType(),
-                            "score":s.showScore(),
-                            "reference_score":(showReference?s.showAveragePercentPositiveTma_scoring_referencesText():Double.NaN)+"%",
-                            "scoring_date":df.format(s.showScoringScoring_date()),
-                            )            
-                        }
-                    }
+                
+
+                for (ssInstance in ssInstances) {
+                    String title = "Click me to show TMA core; you "+(scoring_sessionsInstance.showSubmitted()==true ? 'cannot' : 'can')+" update score";
+                    String url = createLink(controller:"scoring_sessions", action:"score", params:[id:scoring_sessionsInstance.getId(), tma_scoring_id:ssInstance.getId()]);
+                    id = unique_id;
+                    core_id = ssInstance.getTma_core_image().getTma_core().getCore_id();
+                    description = ssInstance.showScoringDescription()+ViewConstants.AJAX_RESPONSE_DELIMITER+url+ViewConstants.AJAX_RESPONSE_DELIMITER+title;
+                    type = ssInstance.showScoreType();
+                    score = ssInstance.showScore();
+                    reference_score = (showReference?ssInstance.showAveragePercentPositiveTma_scoring_referencesText():Double.NaN)+"%";
+                    scoring_date = df.format(ssInstance.showScoringScoring_date());
+                    array.add("id":id, "core_id":core_id,"description":description,"type":type,"score":score,"reference_score":reference_score,"scoring_date":scoring_date);
+                    unique_id++;
                 }
-            } else if (scoring_sessionsInstance.showContainsOnlyWhole_section_scorings()) {                
+                
+
                 render(contentType: "text/json") {
-                    scoring_session_scoring_type: ViewConstants.SCORING_SESSION_SCORING_TYPE_WHOLE_SECTION_SCORING;
-                    identifier: "id"
-                    numRows: scoring_sessionsInstance.getWhole_section_scorings().size()
-                    items:array{
-                        scoring_sessionsInstance.getWhole_section_scorings().each { s ->
-                            // NOTE: items in array canNOT be null 
-                            String title = "Click me to show whole section; you "+(scoring_sessionsInstance.showSubmitted()==true ? 'cannot' : 'can')+" update score";
-                            String url = createLink(controller:"scoring_sessions", action:"score", params:[id:scoring_sessionsInstance.getId(), whole_section_scoring_id:s.getId()]);
-                            item(
-                            "id":unique_id++,
-                            "whole_section_specimen_num":s.getWhole_section_image().getWhole_section_slice().getParaffin_block().getSpecimen_number(),
-                            "description":s.showScoringDescription()+ViewConstants.AJAX_RESPONSE_DELIMITER+url+ViewConstants.AJAX_RESPONSE_DELIMITER+title,
-                            "type":s.showScoreType(),
-                            "score":s.showScoreShort(),
-                            "scoring_date":df.format(s.showScoringScoring_date()),
-                            )            
-                        }
-                    }
+                    scoring_session_scoring_type(ViewConstants.SCORING_SESSION_SCORING_TYPE_TMA_SCORING)
+                    references_available(showReference)
+                    identifier("id")
+                    numRows(scoring_sessionsInstance.getTma_scorings().size())
+                    items(array)
+                }
+
+            } else if (scoring_sessionsInstance.showContainsOnlyWhole_section_scorings()) { 
+
+                List array = new ArrayList(scoring_sessionsInstance.getWhole_section_scorings().size());
+                int id = 0;
+                String core_id;
+                String whole_section_specimen_num;
+                String description;
+                String type;
+                String score;
+                String scoring_date;
+                ArrayList ssInstances = scoring_sessionsInstance.getWhole_section_scorings();
+
+                for (ssInstance in ssInstances) {
+                    String title = "Click me to show whole section; you "+(scoring_sessionsInstance.showSubmitted()==true ? 'cannot' : 'can')+" update score";
+                    String url = createLink(controller:"scoring_sessions", action:"score", params:[id:scoring_sessionsInstance.getId(), whole_section_scoring_id:ssInstance.getId()]);
+                    id = unique_id;
+                    whole_section_specimen_num = ssInstance.getWhole_section_image().getWhole_section_slice().getParaffin_block().getSpecimen_number();
+                    description = ssInstance.showScoringDescription()+ViewConstants.AJAX_RESPONSE_DELIMITER+url+ViewConstants.AJAX_RESPONSE_DELIMITER+title;
+                    type = ssInstance.showScoreType();
+                    score = ssInstance.showScoreShort();
+                    scoring_date = df.format(ssInstance.showScoringScoring_date());
+                    array.add("id":id, "whole_section_specimen_num":whole_section_specimen_num,"description":description,"type":type,"score":score,"scoring_date":scoring_date);
+                    unique_id++;
+                }
+
+                render(contentType: "text/json") {
+                    scoring_session_scoring_type(ViewConstants.SCORING_SESSION_SCORING_TYPE_WHOLE_SECTION_SCORING)
+                    identifier("id")
+                    numRows(scoring_sessionsInstance.getWhole_section_scorings().size())
+                    items(array)
                 }
                 
             } else { // TODO: currently DOES NOT support scoring sessions with mixed tma scoring and whole section scoring

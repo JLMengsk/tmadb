@@ -9,7 +9,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
         <title>Edit existing biomarker record</title>
-    <r:require modules="biomarkers"/>
+        <asset:stylesheet src="application.css"/>
+        <asset:javascript src="application.js"/>
 </head>
 <body>
     <div class="body">

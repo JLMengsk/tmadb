@@ -7,6 +7,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="layout" content="main" />
     <title>Score TMA</title>
+    <style type="text/css">
+        @import "https://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojox/grid/resources/claroGrid.css";
+        /*Grid needs an explicit height by default*/
+        #submitted_scoring_sessionsGrid {
+            height: 20em;
+        }
+    </style>
   </head>
   <body>
     <div class="body">
@@ -14,8 +21,7 @@
       <g:if test="${user.showIsAdministrator()}">[<g:link controller="scoring_sessions" action="setup">setup</g:link>]</g:if>
       <h2>Submitted scoring session</h2>
 
-      <div id="submitted_scoring_sessionsGrid" 
-           style="width: ${ViewConstants.SCORING_SESSIONS_GRID_WIDTH}px; height: ${ViewConstants.SCORING_SESSIONS_GRID_HEIGHT}px;">
+      <div id="submitted_scoring_sessionsGrid">
         ... loading ... please wait
       </div>   
     </div>

@@ -8,6 +8,13 @@
     <title>Scoring session report: ${scoring_sessionsInstance.getName()}</title>
     <asset:stylesheet src="application.css"/>
     <asset:javascript src="application.js"/>
+    <style type="text/css">
+        @import "https://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojox/grid/resources/claroGrid.css";
+        /*Grid needs an explicit height by default*/
+        #scoring_sessionReportGrid {
+            height: 20em;
+        }
+    </style>
   </head>
   <body>
     <div class="body">
@@ -69,8 +76,7 @@
             onclick="if(confirm('You will not be able to modify scores once submitted.  Continue to submit?')){showWaitDialogMsg(1,'Please wait ...','Please wait for the page to load ...');return true;} else {return false;}">submit scores</g:link></div>
         ]
       </g:if>
-      <div id="scoring_sessionReportGrid" 
-           style="width: ${ViewConstants.SCORING_SESSION_REPORT_GRID_WIDTH}px; height: ${ViewConstants.SCORING_SESSION_REPORT_GRID_HEIGHT}px;">
+      <div id="scoring_sessionReportGrid">
         ... loading ... please wait
       </div>
 
@@ -79,7 +85,7 @@
   <asset:script type="text/javascript">
     require(["dojo/_base/xhr"], function (xhr) {
 
-    showWaitDialog(1);
+    //showWaitDialog(1);
     
     xhr.get({
     url:'${createLink(controller:"scoring_sessions", action:"ajax_get_report_table", id:scoring_sessionsInstance.getId())}',
@@ -89,7 +95,7 @@
     setInitialPageBodyHeight();
     setInitialFooterPosition();
     resizeDojoDataGrid_table('scoring_sessionReportGrid');
-    closeWaitDialog();
+    //closeWaitDialog();
     },
     onError:function(e){alert("${ViewConstants.UNKNOWN_SERVER_ERROR_MESSAGE }");}
     }); // xhr.get		

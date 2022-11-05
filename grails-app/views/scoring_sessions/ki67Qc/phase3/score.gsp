@@ -137,7 +137,7 @@
     function uploadNucleiSelection(nucleiSelectionParamString) {
     var inputComment = document.getElementById('inputComment').value;
     var xhrHandle = null;
-    showWaitDialogMsg(1,"uploading ...","uploading nuclei selections ... please wait");
+    //showWaitDialogMsg(1,"uploading ...","uploading nuclei selections ... please wait");
     
     require(["dojo/_base/xhr"], function (xhr) {
         xhrHandle = xhr.post({
@@ -145,7 +145,7 @@
             content: { id:whole_section_region_scoring_id, nucleiSelectionParamString:nucleiSelectionParamString, inputComment:inputComment },
             handleAs: "text",
             load: function (e) {
-                closeWaitDialog();
+                //closeWaitDialog();
                 checkUpdateNucleiSelection(e, "${createLink(controller:"scoring_sessions", action:"score",params:[id:scoring_sessionInstance.getId(), whole_section_scoring_id:whole_section_scoring.getId()])}");
                 if (!_tempSaveStatusOK) {
                     showMessageDialog("ERROR", "ERROR. failed to save nuclei count.");

@@ -10,11 +10,10 @@
     <asset:stylesheet src="application.css"/>
     <asset:javascript src="application.js"/>
     <style type="text/css">
-        @import "https://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojox/grid/resources/claroGrid.css";
+        @import "https://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojox/grid/resources/claroGrid.css";
         /*Grid needs an explicit height by default*/
         #scoring_sessionsGrid {
-            height: 10em;
-            width: 40em;
+            height: 20em;
         }
     </style>
   </head>

@@ -6,6 +6,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
         <title>TMA projects available to ${user.getName()}</title>
+        <asset:stylesheet src="application.css"/>
+        <asset:javascript src="application.js"/>
+        <style type="text/css">
+        @import "https://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojox/grid/resources/claroGrid.css";
+        /*Grid needs an explicit height by default*/
+        #tma_projectsGrid {
+            height: 20em;
+        }
+        </style>
     </head>
     <body>
         <div class="body">
@@ -14,37 +23,10 @@
             <div class="dialog">
                 <p>${user.getDescription()}</p>
 
-                <div id="tma_projectsGrid" 
-                style="width: ${ViewConstants.TMA_PROJECTS_GRID_WIDTH}px; height: ${ViewConstants.TMA_PROJECTS_GRID_HEIGHT}px;">
+                <div id="tma_projectsGrid">
                 ... loading ... please wait</div>
         </div>
     </div>
-
-
-<script>
-  // Instead of using data-dojo-config, we're creating a dojoConfig
-  // object *before* we load dojo.js; they're functionally identical,
-  // it's just easier to read this approach with a larger configuration.
-  var dojoConfig = {
-    async: true,
-    // This code registers the correct location of the "demo"
-    // package so we can load Dojo from the CDN whilst still
-    // being able to load local modules
-    packages: [{
-      name: "demo",
-      location: location.pathname.replace(/\/[^/]*$/, '') + '/demo'
-    }]
-  };
-</script>
-<!-- load Dojo -->
-<script src="//ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js"></script>
-
-
-<asset:stylesheet src="application.css"/>
-<asset:javascript src="application.js"/>
-
-
-
 
 <asset:script type="text/javascript" disposition="head">    
     require([

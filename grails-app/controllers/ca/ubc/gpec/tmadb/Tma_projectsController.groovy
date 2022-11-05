@@ -113,21 +113,25 @@ class Tma_projectsController {
         Users user = Users.findByLogin(session.user.login)
         def tma_projects = Tma_projects.list(params, user)
         int unique_id=0; // unique id for dojo table
+        int id = 0;
+        String name;
+        String built_by;
+        String description;
+        String core_id_name;
+        ArrayList array = new ArrayList(tma_projects.size());
+        for (tma_project in tma_projects) {
+            id = unique_id;
+            name = tma_project.name+ViewConstants.AJAX_RESPONSE_DELIMITER+tma_project.id;
+            built_by = tma_project.getBuilt_by();
+            description = tma_project.getDescription();
+            core_id_name = tma_project.getCore_id_name();
+            array.add("id":id, "name":name,"built_by":built_by,"description":description,"core_id_name":core_id_name);
+            unique_id++;
+        }
         render(contentType: "text/json") {
-            identifier: "id"
-            numRows: tma_projects.size()
-            items: array{
-                tma_projects.each { w -> 
-                    // NOTE: items in array canNOT be null
-                    item(
-                        "id":unique_id++,
-                        "name":w.name+ViewConstants.AJAX_RESPONSE_DELIMITER+w.id,
-                        "built_by":w.getBuilt_by(),
-                        "description":w.getDescription(),
-                        "core_id_name":w.getCore_id_name()
-                    )         
-                }
-            }
+            identifier("id")
+            numRows(tma_projects.size())
+            items(array)
         }
     }
     

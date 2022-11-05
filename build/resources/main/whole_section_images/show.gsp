@@ -11,12 +11,6 @@
   <body>
     <div class="body">
       <div style='display: inline'>
-    <script type="text/javascript" djConfig="isDebug:true" src="//ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
-    <script type="text/javascript">
-        dojo.addOnLoad(function(){
-            alert('loaded,all good');
-        });
-    </script>
         <g:link controller="patients" action="show" id="${whole_section_slicesInstance.getParaffin_block()?.getPatient()?.getId()}" title="${whole_section_slicesInstance.getParaffin_block()?.getPatient()?.getPatient_source()?.toString()}">${whole_section_slicesInstance.getParaffin_block()?.getPatient()?.encodeAsHTML()}</g:link>
         &#8594;
         <g:if test="${whole_section_slicesInstance.getParaffin_block().showIsSurgical_block()}">

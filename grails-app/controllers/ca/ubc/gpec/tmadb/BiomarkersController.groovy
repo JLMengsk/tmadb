@@ -123,17 +123,20 @@ class BiomarkersController {
      */
     def ajax_get_biomarker_by_name = {
         def existingBiomarkers = Biomarkers.findAllByName(params.get(ViewConstants.HTML_PARAM_NAME_EDIT_BIOMARKER_INPUT_NAME))
+        String name;
+        String description;
+        String biomarker_type; 
+        List array = new ArrayList(existingBiomarkers.size());
+        for (existingBiomarker in existingBiomarkers){
+            name = existingBiomarker.name;
+            description = existingBiomarker.description==null?"":existingBiomarker.description; // NOTE: items in array canNOT be null
+            biomarker_type = existingBiomarker.biomarker_type.name;
+            array.add("name":name,"description":description,"biomarker_type":biomarker_type);
+        }
+
         render(contentType: "text/json") {
-            numRows:existingBiomarkers.size()
-            items: array{
-                existingBiomarkers.each {
-                    w -> item(
-                        "name":w.name,
-                        "description":w.description==null?"":w.description, // NOTE: items in array canNOT be null
-                        "biomarker_type":w.biomarker_type.name,
-                    )      
-                }
-            }
+            numRows(existingBiomarkers.size())
+            items(array)
         }
     }
 }

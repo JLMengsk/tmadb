@@ -10,6 +10,13 @@
         <title><g:message code="default.show.label" args="[entityName]" /></title>
         <asset:stylesheet src="application.css"/>
         <asset:javascript src="application.js"/>
+        <style type="text/css">
+        @import "https://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojox/grid/resources/claroGrid.css";
+        /*Grid needs an explicit height by default*/
+        #tma_slicesGrid {
+            height: 20em;
+        }
+    </style>
     </head>
     <body>
         <div class="body">
@@ -23,8 +30,7 @@
                 </g:if>
 
                 <h2>TMA slices available to ${user.getName()} (n=<div id="slide_count" style='display: inline'></div>)</h2>
-                <div id="tma_slicesGrid" 
-                style="width: ${ViewConstants.TMA_SLICES_GRID_WIDTH}px; height: ${ViewConstants.TMA_SLICES_GRID_HEIGHT}px;">
+                <div id="tma_slicesGrid">
                 ... loading ... please wait</div>
 
         </div>

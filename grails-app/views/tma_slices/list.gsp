@@ -8,6 +8,13 @@
         <title>TMA slices available to ${user.getName()}</title>
         <asset:stylesheet src="application.css"/>
         <asset:javascript src="application.js"/>
+        <style type="text/css">
+        @import "https://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojox/grid/resources/claroGrid.css";
+        /*Grid needs an explicit height by default*/
+        #tma_slicesGrid {
+            height: 20em;
+        }
+        </style>
     </head>
     <body>
         <div class="body">
@@ -16,8 +23,7 @@
             <div class="dialog">
                 <p>${user.getDescription()}</p>
 
-                <div id="tma_slicesGrid" 
-                style="width: ${ViewConstants.TMA_SLICES_GRID_WIDTH}px; height: ${ViewConstants.TMA_SLICES_GRID_HEIGHT}px;">
+                <div id="tma_slicesGrid">
                 ... loading ... please wait</div>
         </div>
 

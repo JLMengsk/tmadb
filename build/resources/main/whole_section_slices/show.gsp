@@ -9,6 +9,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="layout" content="main" />
     <title>Whole section slice</title>
+    <asset:stylesheet src="application.css"/>
+    <asset:javascript src="application.js"/>
   </head>
   <body>
     <div class="body">
@@ -65,11 +67,11 @@
         </table>
       </div>
     </div>
-  <r:require module="whole_section_slices"/>
-  <r:script>
+
+  <asset:script type="text/javascript">    
     require(["dojo/_base/xhr"], function (xhr) {
 
-    var waitDialogObj = getWaitDialog();
+    //var waitDialogObj = getWaitDialog();
 
     // get some data, convert to JSON
     xhr.get({
@@ -80,10 +82,10 @@
     e,
     ${whole_section_slicesInstance.getId()},
     "whole_section_slices_select_id");
-    waitDialogObj.destroy();
+    //waitDialogObj.destroy();
     },onError:function(e){alert("${ViewConstants.UNKNOWN_SERVER_ERROR_MESSAGE}");}
     }); // xhr.get
     }); // function (xhr)
-  </r:script>
+  </asset:script>
 </body>
 </html>

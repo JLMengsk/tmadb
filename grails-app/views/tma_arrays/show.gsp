@@ -8,6 +8,15 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'tma_arrays.label', default: 'TMA array')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
+        <asset:stylesheet src="application.css"/>
+        <asset:javascript src="application.js"/>
+        <style type="text/css">
+        @import "https://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojox/grid/resources/claroGrid.css";
+        /*Grid needs an explicit height by default*/
+        #tma_slicesGrid {
+            height: 20em;
+        }
+        </style>
     </head>
     <body>
         <div class="body">
@@ -20,16 +29,15 @@
             <g:showFlashMessage />
             <div class="dialog">
                 <h2>TMA slices available to ${user.getName()} (n=<div id="slide_count" style='display: inline'></div>)</h2>
-                <div id="tma_slicesGrid" 
-                style="width: ${ViewConstants.TMA_SLICES_GRID_WIDTH}px; height: ${ViewConstants.TMA_SLICES_GRID_HEIGHT}px;">
+                <div id="tma_slicesGrid">
                 ... loading ... please wait</div>
         </div>
     </div>
-<r:require module="tma_slices"/>
-<r:script>
+
+<asset:script type="text/javascript">
     require(["dojo/_base/xhr"], function (xhr) {
 
-    var waitDialogObj = getWaitDialog();
+    //var waitDialogObj = getWaitDialog();
 
     // get some data, convert to JSON
     xhr.get({
@@ -45,7 +53,7 @@
     e,
     "tma_slicesGrid","slide_count");
     resizeDojoDataGrid_table('tma_slicesGrid');
-    waitDialogObj.destroy();
+    //waitDialogObj.destroy();
     },onError:function(e){alert("${ViewConstants.UNKNOWN_SERVER_ERROR_MESSAGE }");}
     }); // xhr.get
 
@@ -56,6 +64,6 @@
     }
 
     }); // function (xhr)
-</r:script>
+</asset:script>
 </body>
 </html>

@@ -58,29 +58,36 @@ class Whole_section_slicesController {
                 }
             }
         }
-        
-        render(contentType: "text/json") {
-            identifier: "id"
-            numRows: whole_section_slices.size()
-            items: array{
-                whole_section_slices.each { w -> 
-                    Biomarkers biomarker = w.getStaining_detail().getBiomarker();
-                    String block_string = "";
-                    if (w.getParaffin_block().showIsSurgical_block()) {
-                        block_string = w.getParaffin_block().getSurgical_block().encodeAsHTML()+ViewConstants.AJAX_RESPONSE_DELIMITER+createLink(controller:"surgical_blocks", action:"show", id:w.getParaffin_block().getSurgical_block().getId())
-                    } else if (w.getParaffin_block().showIsCore_biopsy_block()) {
-                        block_string = w.getParaffin_block().getCore_biopsy_block().encodeAsHTML()+ViewConstants.AJAX_RESPONSE_DELIMITER+createLink(controller:"core_biopsy_blocks", action:"show", id:w.getParaffin_block().getCore_biopsy_block().getId());
-                    } else {
-                        block_string = w.getParaffin_block().encodeAsHTML()+createLink(controller:"paraffin_blocks", action:"show", id:w.getParaffin_block().getId());
-                    }
-                    item(
-                        "id":w.getId(),
-                        "name":w.getName()+ViewConstants.AJAX_RESPONSE_DELIMITER+createLink(controller:"whole_section_slices", action:"show", id:w.getId()),
-                        "block":block_string,
-                        "biomarker":biomarker.getName()+" ("+biomarker.getBiomarker_type().getName()+")"+ViewConstants.AJAX_RESPONSE_DELIMITER+createLink(controller:"biomarkers", action:"show", id:biomarker.getId())
-                    )         
-                }
+        int id;
+        String name;
+        String block;
+        String bm;
+        ArrayList array = new ArrayList(whole_section_slices.size());
+
+        for (whole_section_slice in whole_section_slices) {
+
+            Biomarkers biomarker = whole_section_slice.getStaining_detail().getBiomarker();
+            String block_string = "";
+            if (whole_section_slice.getParaffin_block().showIsSurgical_block()) {
+                block_string = whole_section_slice.getParaffin_block().getSurgical_block().encodeAsHTML()+ViewConstants.AJAX_RESPONSE_DELIMITER+createLink(controller:"surgical_blocks", action:"show", id:whole_section_slice.getParaffin_block().getSurgical_block().getId())
+            } else if (whole_section_slice.getParaffin_block().showIsCore_biopsy_block()) {
+                block_string = whole_section_slice.getParaffin_block().getCore_biopsy_block().encodeAsHTML()+ViewConstants.AJAX_RESPONSE_DELIMITER+createLink(controller:"core_biopsy_blocks", action:"show", id:whole_section_slice.getParaffin_block().getCore_biopsy_block().getId());
+            } else {
+                block_string = whole_section_slice.getParaffin_block().encodeAsHTML()+createLink(controller:"paraffin_blocks", action:"show", id:whole_section_slice.getParaffin_block().getId());
             }
+
+            id = whole_section_slice.getId();
+            name = whole_section_slice.getName()+ViewConstants.AJAX_RESPONSE_DELIMITER+createLink(controller:"whole_section_slices", action:"show", id:whole_section_slice.getId());
+            block = block_string;
+            bm = biomarker.getName()+" ("+biomarker.getBiomarker_type().getName()+")"+ViewConstants.AJAX_RESPONSE_DELIMITER+createLink(controller:"biomarkers", action:"show", id:biomarker.getId());
+            array.add("id":id, "name":name,"block":block,"biomarker":bm);
+        }
+
+        render(contentType: "text/json") {
+            identifier("id")
+            numRows(whole_section_slices.size())
+            items(array)
+
         }
     }
 

@@ -161,27 +161,36 @@ class Tma_slicesController {
             }
         }
         int unique_id=0; // unique id for dojo table
+        int id = 0;
+        String name;
+        String tb;
+        String ta;
+        String tp;
+        String bm;
+
+
+        List array = new ArrayList(tma_slices.size());
+
+        for (tma_slice in tma_slices) {
+            Tma_blocks tma_block = tma_slice.getTma_block();
+            Tma_arrays tma_array = tma_block.getTma_array();
+            Tma_projects tma_project = tma_array.getTma_project();
+            Biomarkers biomarker = tma_slice.getStaining_detail().getBiomarker();
+            id = unique_id++;
+            name = tma_slice.name+ViewConstants.AJAX_RESPONSE_DELIMITER+tma_slice.id;
+            tb = tma_block.getName()+ViewConstants.AJAX_RESPONSE_DELIMITER+tma_block.getId();
+            ta = ""+tma_array.getArray_version()+ViewConstants.AJAX_RESPONSE_DELIMITER+tma_array.getId();
+            tp = tma_project.getName()+ViewConstants.AJAX_RESPONSE_DELIMITER_2+tma_project.getDescription()+ViewConstants.AJAX_RESPONSE_DELIMITER+tma_project.getId();
+            bm = biomarker.getName()+" ("+biomarker.getBiomarker_type().getName()+")"+ViewConstants.AJAX_RESPONSE_DELIMITER+biomarker.getId();
+            array.add("id":id, "name":name,"tma_block":tb,"tma_array":ta,"tma_project":tp,"biomarker":bm);
+            unique_id++;
+        }
+
 
         render(contentType: "text/json") {
-            identifier: "id"
-            numRows: tma_slices.size()
-            items: array{
-                tma_slices.each { w -> 
-                    // NOTE: items in array canNOT be null
-                    Tma_blocks tma_block = w.getTma_block();
-                    Tma_arrays tma_array = tma_block.getTma_array();
-                    Tma_projects tma_project = tma_array.getTma_project();
-                    Biomarkers biomarker = w.getStaining_detail().getBiomarker();
-                    item(
-                        "id":unique_id++,
-                        "name":w.name+ViewConstants.AJAX_RESPONSE_DELIMITER+w.id,
-                        "tma_block":tma_block.getName()+ViewConstants.AJAX_RESPONSE_DELIMITER+tma_block.getId(),
-                        "tma_array":""+tma_array.getArray_version()+ViewConstants.AJAX_RESPONSE_DELIMITER+tma_array.getId(),
-                        "tma_project":tma_project.getName()+ViewConstants.AJAX_RESPONSE_DELIMITER_2+tma_project.getDescription()+ViewConstants.AJAX_RESPONSE_DELIMITER+tma_project.getId(),
-                        "biomarker":biomarker.getName()+" ("+biomarker.getBiomarker_type().getName()+")"+ViewConstants.AJAX_RESPONSE_DELIMITER+biomarker.getId()
-                    )         
-                }
-            }
+            identifier("id")
+            numRows(tma_slices.size())
+            items(array)
         }
     }
 }
