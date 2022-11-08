@@ -41,7 +41,7 @@
                             </tr>
                             
                             <tr class="prop">
-                                <td valign="top" class="name">
+                                <td valign="top" class="name" width=100px>
                                   <label for="core_id_name"><g:message code="tma_projects.core_id_name.label" default="Core ID name" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: tma_projectsInstance, field: 'core_id_name', 'errors')}">

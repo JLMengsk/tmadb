@@ -1,6 +1,6 @@
 package ca.ubc.gpec.tmadb.download.tma;
 
-import org.apache.commons.logging.Log;
+import ch.qos.logback.classic.Logger;
 
 import ca.ubc.gpec.tmadb.Scoring_sessions;
 import ca.ubc.gpec.tmadb.Users;
@@ -22,7 +22,7 @@ class DownloadScoringSessionNucleiSelections extends DownloadCoreScores {
      * @param log
      * @param user
      */
-    public DownloadScoringSessionNucleiSelections(Log log, Users user, String table_format, String file_format, Scoring_sessions scoring_session) {
+    public DownloadScoringSessionNucleiSelections(Logger log, Users user, String table_format, String file_format, Scoring_sessions scoring_session) {
         super(log, user);
         setTable_format(table_format);
         setFile_format(file_format);

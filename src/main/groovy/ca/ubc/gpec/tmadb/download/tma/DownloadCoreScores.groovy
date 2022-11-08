@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.text.DateFormat;
 
-import org.apache.commons.logging.Log;
+import ch.qos.logback.classic.Logger;
 
 import ca.ubc.gpec.tmadb.Tma_results;
 import ca.ubc.gpec.tmadb.Tma_result_names;
@@ -33,7 +33,7 @@ class DownloadCoreScores {
 
     DataFrame dataFrame;
 
-    Log log;
+    Logger log;
     Users user;
     String table_format;
     String file_format;
@@ -43,7 +43,7 @@ class DownloadCoreScores {
      * @param log
      * @param user
      */
-    public DownloadCoreScores(Log log, Users user) {
+    public DownloadCoreScores(Logger log, Users user) {
         this.log = log;
         this.user = user;
         dataFrame = new DataFrame();

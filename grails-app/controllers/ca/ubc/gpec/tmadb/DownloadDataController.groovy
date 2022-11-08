@@ -69,7 +69,19 @@ class DownloadDataController {
         DownloadScoringSessionScores dsss;
         ArrayList<String> desiredVariableNames = new ArrayList<String>();
         if (scoring_session.showContainsOnlyTma_scorings()) {
-            dsss = new DownloadScoringSessionScores(log, Users.findByLogin(session.user.login), DownloadUtils.TABLE_FORMAT_ONE_ROW_PER_CORE_IMAGE,     DownloadUtils.FILE_FORMAT_TEXT_TAB, scoring_session);
+
+            // render log
+
+            // render Users.findByLogin(session.user.login)
+
+            // render DownloadUtils.TABLE_FORMAT_ONE_ROW_PER_CORE_IMAGE
+
+            // render DownloadUtils.FILE_FORMAT_TEXT_TAB
+   
+            // render scoring_session 
+
+            dsss = new DownloadScoringSessionScores(log, Users.findByLogin(session.user.login), DownloadUtils.TABLE_FORMAT_ONE_ROW_PER_CORE_IMAGE, DownloadUtils.FILE_FORMAT_TEXT_TAB, scoring_session);
+
             // specify variable orders - must match order in DownloadCoreScores.groovy
             desiredVariableNames.add(Scoring_sessions.EXPORT_CORE_ID_HEADER_NAME);
             desiredVariableNames.add(Scoring_sessions.EXPORT_CORE_HEADER_NAME);
