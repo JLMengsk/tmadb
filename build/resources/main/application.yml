@@ -46,6 +46,12 @@ environments:
 
 ---
 grails:
+    assets:
+        bundle: false
+        minifyJs: false
+        minifyOptions:
+            excludes: ['ca/ubc/gpec/tmadb/biomarkers/*.js', 'ca/ubc/gpec/tmadb/image_helpers/*.js','ca/ubc/gpec/tmadb/scoring_sessions/*.js', 'ca/ubc/gpec/tmadb/tma_projects/*.js', 'ca/ubc/gpec/tmadb/tma_slices/*.js', 'ca/ubc/gpec/tmadb/whole_section_slices/*.js', 'ca/ubc/gpec/tmadb/scoreTma/*.js', 'ca/ubc/gpec/tmadb/*.js']
+
     resources:
         mappers:
             hashandcache:
@@ -187,7 +193,7 @@ environments:
     production:
         dataSource:
             dbCreate: update
-            url: "jdbc:mysql://www.gpecdata.med.ubc.ca/tmadb"
+            url: "jdbc:mysql://192.168.119.137:3306/tmadb"
             properties:
                 jmxEnabled: true
                 initialSize: 5
@@ -214,7 +220,7 @@ environments:
                 customBuild:
                     js: true
         grails:
-            serverURL: "http://www.gpec.ubc.ca:8080/tmadb"
-            serverURL_noAppName: "http://www.gpec.ubc.ca:8080/"
-            serverSecureURL: "https://www.gpec.ubc.ca/tmadb"
-            serverSecureURL_noAppName: "https://www.gpec.ubc.ca/"
+            serverURL: "http://localhost:8080/tmadb-0.1"
+            serverURL_noAppName: "http://localhost:8080/tmadb-0.1"
+            serverSecureURL: "https://localhost:8081/tmadb-0.1"
+            serverSecureURL_noAppName: "https://localhost:8081/tmadb-0.1"

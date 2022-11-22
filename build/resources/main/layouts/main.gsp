@@ -10,7 +10,7 @@
     <!-- need mymain.css since Grails will rewrite its own main.css -->
     <link rel="stylesheet" href="${resource(dir:'css',file:'mymain.css')}" type="text/css"/>
     <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dijit/themes/claro/claro.css">
     <script>dojoConfig = {parseOnLoad: true}</script>
     <script src="https://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
     <script>
@@ -19,6 +19,7 @@
   dojo.require("dijit.PopupMenuItem");
   dojo.require("dojo.parser");
   dojo.require("dojo.domReady!");
+  dojo.require("dojo/ready");
   dojo.require("dojo/dom");
   dojo.require("dojo/_base/fx");
   dojo.require("dojo/_base/xhr");

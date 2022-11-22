@@ -741,4 +741,3 @@ NucleiCounter.prototype.playNotificationSound = function () {
         this.notificationSound.play();
     }
 };
-

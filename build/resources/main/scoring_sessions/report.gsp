@@ -6,8 +6,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="layout" content="main" />
     <title>Scoring session report: ${scoring_sessionsInstance.getName()}</title>
-    <asset:stylesheet src="application.css"/>
+
     <asset:javascript src="application.js"/>
+
+    <asset:javascript src="ca/ubc/gpec/tmadb/scoring_sessions/scoring_sessions.js"/>
+
+    
     <style type="text/css">
         @import "https://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojox/grid/resources/claroGrid.css";
         /*Grid needs an explicit height by default*/

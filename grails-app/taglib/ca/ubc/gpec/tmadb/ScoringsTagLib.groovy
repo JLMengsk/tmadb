@@ -238,8 +238,8 @@ class ScoringsTagLib {
         out << (displayInOneTd ? "" : "<td valign='top' class='value'>");
         if (tma_scoring?.showIsScoringTypeNucleiCount()) {
             out << "<ul>";
-            out << "<li>select positive nuclei: shift-mouse click</li>";
-            out << "<li>select negative nuclei: control-mouse click</li>";
+            out << "<li>select positive nuclei: shift + mouse double click</li>";
+            out << "<li>select negative nuclei: control + mouse double click</li>";
             // need to synchronize between server/applet FIRST before remove last nuclei selection 
             out << "</ul>"
             out << g.display_nuclei_counter_undo_save_button(tma_scoring: tma_scoring);
