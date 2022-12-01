@@ -774,7 +774,9 @@
             <g:showFlashMessage />
             <p><g:display_scoring_session_progress id="${scoring_sessionInstance.getId()}"/></p>
             <!-- show timer if user has not submitted the results yet ...-->
-            <g:if test="${whole_section_scoring?.showIsAllowedToUpdateScore()}"><asset:script>timeMsg();</asset:script></g:if>
+            <g:if test="${whole_section_scoring?.showIsAllowedToUpdateScore()}">
+                <!-- <asset:script>timeMsg();</asset:script> -->
+            </g:if>
             </g:if>
             <g:display_scoring_image_option scoring="${scoring}"  showReference="${showReference}"  showPageBodyOnly="${showPageBodyOnly}" showHE="${showHE}" showMM="${showMM}" />
         <br>

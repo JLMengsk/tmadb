@@ -24,7 +24,7 @@ Ki67-QC calibrator intro page
         the core, whether each cell was scored positive or negative, and the 
         overall Ki67 score for each core. Images of H&E-stained sections from 
         the cores were also uploaded for reference. </p>
-      <p>The specific Ki67 scoring procedure is described in detail <a href='${grailsApplication.config.grails.serverURL_noAppName+ViewConstants.KI67_QC_CALIBRATOR_METHOD_LINK}'>here <img src='${resource(dir:'images/skin',file:'pdf_icon.jpg')}'/></a>.</p>
+      <p>The specific Ki67 scoring procedure is described in detail <a href='http://www.gpec.ubc.ca/calibrator_doc/nuclei_count_method.pdf'>here <img src='${resource(dir:'images/skin',file:'pdf_icon.jpg')}'/></a>.</p>
       <h2>Try the calibration exercise yourself ...</h2>
       <g:if test="${session.user?.showIsScorer()}">
         <ul>

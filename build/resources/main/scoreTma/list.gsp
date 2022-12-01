@@ -43,8 +43,9 @@
 
     </div>
   <asset:script type="text/javascript">
-    require(["dojo/_base/xhr"], function (xhr) {
-    
+    require(['dojo/_base/window', 'dojo/on', "dojo/_base/xhr","dojo/domReady!"], function (baseWin, on, xhr) {
+    on(window, 'load', function() {
+
     //showWaitDialog(1);
     
     xhr.get({
@@ -68,6 +69,7 @@
     setInitialFooterPosition();
     resizeDojoDataGrid_table('scoring_sessionsGrid'); // set window resize event handler
     }
+  });
     }); // function (xhr)
   </asset:script>
 </body>

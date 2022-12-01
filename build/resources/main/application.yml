@@ -193,7 +193,7 @@ environments:
     production:
         dataSource:
             dbCreate: update
-            url: "jdbc:mysql://ubuntu-db:3306/tmadb"
+            url: "jdbc:mysql://www.gpecdata.med.ubc.ca/tmadb"
             properties:
                 jmxEnabled: true
                 initialSize: 5
@@ -220,7 +220,7 @@ environments:
                 customBuild:
                     js: true
         grails:
-            serverURL: "http://localhost:8080/tmadb-0.1/"
-            serverURL_noAppName: "http://localhost:8080/tmadb-0.1/"
-            serverSecureURL: "https://localhost:8080/tmadb-0.1/"
-            serverSecureURL_noAppName: "https://localhost:8080/tmadb-0.1/"
+            serverURL: "http://www.gpec.ubc.ca:8080/tmadb-0.1"
+            serverURL_noAppName: "http://www.gpec.ubc.ca:8080/tmadb-0.1"
+            serverSecureURL: "http://www.gpec.ubc.ca:8080/tmadb-0.1"
+            serverSecureURL_noAppName: "http://www.gpec.ubc.ca:8080/tmadb-0.1"

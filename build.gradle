@@ -91,7 +91,7 @@ dependencies {
     testImplementation "org.seleniumhq.selenium:selenium-remote-driver:4.0.0"
     testImplementation "org.seleniumhq.selenium:selenium-api:4.0.0"
     testImplementation "org.seleniumhq.selenium:selenium-support:4.0.0"
-    testRuntimeOnly "org.seleniumhq.selenium:selenium-chrome-driver:4.0.0"
+    testRuntimeOnly "org.seleniumhq.selenium:selenium-chrome-driver:4.6.0"
     testRuntimeOnly "org.seleniumhq.selenium:selenium-firefox-driver:4.0.0"
 
     //add this one
@@ -152,11 +152,10 @@ assets {
     enableSourceMaps = false
 
     minifyOptions = [
-    optimizationLevel: 'SIMPLE',
+    optimizationLevel: 'WHITESPACE_ONLY',
     angularPass: true // Can use @ngInject annotation for Angular Apps
     ]
 
 
     //includes = ['/grails-app/assets/javascripts']
 }
-   

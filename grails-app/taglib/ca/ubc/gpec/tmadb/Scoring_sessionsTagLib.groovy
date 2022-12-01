@@ -41,10 +41,10 @@ class Scoring_sessionsTagLib {
                 out << " onClick=\"cleanUp(); return true;\">";
             }
             out << "calibrator intro page <img src='"+resource(dir:'images/skin',file:'calibration.png')+"'/></a>&nbsp;|&nbsp;";
-            out << "<a href='"+grailsApplication.config.grails.serverURL_noAppName+ViewConstants.KI67_QC_CALIBRATOR_METHOD_LINK+"' target='ki67_qc_calibrator_help'>scoring procedure <img src='"+resource(dir:'images/skin',file:'pdf_icon.jpg')+"'/></a>&nbsp;|&nbsp;";
-            out << "<button dojoType='dijit.form.Button' onclick='window.open(\""+grailsApplication.config.grails.serverURL_noAppName+ViewConstants.KI67_QC_CALIBRATOR_FAQ_LINK+"\", \"ki67_qc_calibrator_help\", \"\");'>troubleshooting</button>";
+            out << "<a href='http://www.gpec.ubc.ca/calibrator_doc/nuclei_count_method.pdf' target='ki67_qc_calibrator_help'>scoring procedure <img src='"+resource(dir:'images/skin',file:'pdf_icon.jpg')+"'/></a>&nbsp;|&nbsp;";
+            out << "<button dojoType='dijit.form.Button' onclick='window.open(\"http://www.gpec.ubc.ca/calibrator_doc/faqs.html\");'>troubleshooting</button>";
         } else {
-            out << "<button dojoType='dijit.form.Button' onclick='window.open(\""+grailsApplication.config.grails.serverURL_noAppName+ViewConstants.KI67_QC_PHASE3_FAQ_LINK+"\", \"ki67_qc_phase3_help\", \"\");'>troubleshooting</button>";
+            out << "<button dojoType='dijit.form.Button' onclick='window.open(\"http://www.gpec.ubc.ca/calibrator_doc/faqs.html\");'>troubleshooting</button>";
         }
         out << "</div>";
         out << "</div>";

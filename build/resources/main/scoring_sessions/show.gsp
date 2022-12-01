@@ -765,10 +765,6 @@
         };
         </script>
 
-
-
-
-
 </head>
 <body>
     <div class="body">
@@ -777,7 +773,9 @@
             <g:showFlashMessage />
             <p><g:display_scoring_session_progress id="${scoring_sessionInstance.id}"/></p>
             <!-- show timer if user has not submitted the results yet ...-->
-            <g:if test="${tma_scoringInstance?.showIsAllowedToUpdateScore() || whole_section_scoring?.showIsAllowedToUpdateScore()}"><assert:script>timeMsg();</assert:script></g:if>
+            <g:if test="${tma_scoringInstance?.showIsAllowedToUpdateScore() || whole_section_scoring?.showIsAllowedToUpdateScore()}">
+                <!-- <assert:script>timeMsg();</assert:script> -->
+            </g:if>
             </g:if>
             <g:elseif test="${showReference}"><h1>${referenceTitle}</h1></g:elseif>
         <g:elseif test="${showHE}"><h1>H&E image</h1></g:elseif>
