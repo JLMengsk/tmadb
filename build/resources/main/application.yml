@@ -222,5 +222,5 @@ environments:
         grails:
             serverURL: "http://www.gpec.ubc.ca:8080/tmadb-0.1"
             serverURL_noAppName: "http://www.gpec.ubc.ca:8080/tmadb-0.1"
-            serverSecureURL: "http://www.gpec.ubc.ca:8080/tmadb-0.1"
-            serverSecureURL_noAppName: "http://www.gpec.ubc.ca:8080/tmadb-0.1"
+            serverSecureURL: "https://www.gpec.ubc.ca/tmadb-0.1"
+            serverSecureURL_noAppName: "https://www.gpec.ubc.ca/tmadb-0.1"
